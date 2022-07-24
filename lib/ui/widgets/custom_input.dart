@@ -3,7 +3,7 @@ import 'package:dictionary_app_flutter/ui/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomInput extends StatelessWidget {
-  const CustomInput({Key? key,this.onType}) : super(key: key);
+  const CustomInput({Key? key, this.onType}) : super(key: key);
   final Function(String)? onType;
 
   @override
@@ -31,9 +31,7 @@ class CustomInput extends StatelessWidget {
             filled: true,
             fillColor: Colors.white30,
             hintText: AppStrings.hintText,
-            hintStyle:const  TextStyle(
-                fontWeight: FontWeight.normal,
-                color: Color.fromARGB(207, 1, 3, 24)),
+            hintStyle: const TextStyle(color: Color.fromARGB(207, 1, 3, 24)),
 
             icon: const Icon(
               Icons.text_fields,

@@ -5,6 +5,7 @@ import 'package:dictionary_app_flutter/ui/widgets/custom_button.dart';
 import 'package:dictionary_app_flutter/ui/widgets/custom_input.dart';
 import 'package:dictionary_app_flutter/ui/widgets/meaning_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class DictionaryScreen extends StatefulWidget {
   const DictionaryScreen({Key? key}) : super(key: key);
@@ -25,8 +26,20 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
   }
 
   void toggleLoading() {
+    EasyLoading.instance
+    ..loadingStyle=EasyLoadingStyle.custom
+    ..indicatorColor= Colors.grey.shade50
+    ..textColor = Colors.red
+    ..backgroundColor=Colors.grey.shade900;
     setState(() {
       isLoading = !isLoading;
+      if (isLoading == true) {
+
+        EasyLoading.show();
+      }
+      else{
+        EasyLoading.dismiss();
+      }
     });
   }
 
@@ -40,6 +53,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
   void onPress() async {
     changeFocus();
     toggleLoading();
+
     final response = await _dictionaryService.getData(searchStr);
     setState(() {
       wordMeaning = response;
@@ -50,6 +64,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -72,7 +87,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
           CustomInput(
             onType: updateUi,
           ),
-           SizedBox(
+          SizedBox(
             height: 15,
           ),
           CustomButton(
@@ -89,14 +104,14 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
             onPressed: () => onPress(),
             // backgroundColor: Colors.transparent
           ),
-           SizedBox(
+          SizedBox(
             height: 15,
           ),
           Divider(
             thickness: 1,
             color: Colors.grey.shade600,
           ),
-           SizedBox(
+          SizedBox(
             height: 10,
           ),
           Padding(
@@ -106,7 +121,10 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
               style: theme.textTheme.headline2,
             ),
           ),
-           SizedBox(
+          //  Center(
+          //         child: isLoading ? CircularProgressIndicator( ) : Container(),
+          //       ),
+          SizedBox(
             height: 5,
           ),
           wordMeaning != null
