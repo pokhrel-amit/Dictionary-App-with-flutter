@@ -1,3 +1,4 @@
+![dictionary](https://user-images.githubusercontent.com/95612215/180644900-eee14628-a6b5-43b3-80d9-3beac30697a5.gif)
 # dictionary_app_flutter
 
 A new Flutter project.
